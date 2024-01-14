@@ -1,0 +1,20 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main"></div>
+    <script type="module">
+      import { createElement } from "./index.js";
+      const el = createElement("div", { children: "value" });
+
+      const app = document.getElementById("main");
+
+      if (app) {
+        app.appendChild(el.el);
+      }
+    </script>
+  </body>
+</html>
