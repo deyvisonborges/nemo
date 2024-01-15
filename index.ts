@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 // index.ts
 type ElementProps = {
   children: string | Node;
@@ -12,7 +14,6 @@ export function createElement(
 
   const el = document.createElement(tag);
   const elRef = document.getElementById(el.id);
-
 
   if (props) {
     if (typeof props.children == "string") {

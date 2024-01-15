@@ -7,13 +7,14 @@
   <body>
     <div id="main"></div>
     <script type="module">
-      import { createElement } from "./index.js";
+      import { createElement, useElRef } from "./index.js";
       const el = createElement("div", { children: "value" });
 
       const app = document.getElementById("main");
 
       if (app) {
-        app.appendChild(el.el);
+        app.appendChild(el.component);
+        useElRef(el.component);
       }
     </script>
   </body>

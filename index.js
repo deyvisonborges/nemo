@@ -1,16 +1,24 @@
 "use strict";
 
+const fs = require("fs");
+
+function generateId() {
+  var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  var uniqid = randLetter + Date.now();
+  return uniqid.toLowerCase();
+}
+
 /**
  * @param {keyof HTMLElementTagNameMap} tag
  * @param {ElementProps} props
  */
-export function createElement(tag, props) {
+export function createElement(tag, props, style) {
   if (window === undefined || document === undefined)
     throw new Error("The 'createElement' function only works in the browser.");
 
   const el = document.createElement(tag);
 
-  el._ref = el;
+  el.setAttribute("data-id", generateId());
 
   if (props) {
     if (typeof props.children == "string") {
@@ -27,7 +35,19 @@ export function createElement(tag, props) {
   }
 
   return {
-    el,
-    ref: el._ref,
+    component: el,
+    style
   };
+}
+
+/**
+ * @param {string} id - ID do elemento a ser encontrado.
+ */
+export function useElRef(el) {
+  const findedEl = document.querySelector(`[data-id="${el.id}"]`);
+  console.log(findedEl);
+}
+
+export function renderStyle(el) {
+  fs.writeFileSync(`${el.id}.css`, style);
 }
